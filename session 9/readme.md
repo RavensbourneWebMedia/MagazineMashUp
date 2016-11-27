@@ -338,3 +338,66 @@ Here’s the full code in case you’re confused.
 ```
 
 We’ve finally made the first dynamic change to the page. The front end should reflect what you put in your settings.
+
+![alt text](https://github.com/RavensbourneWebMedia/MagazineMashUp/blob/2016/session%209/images/thisisthestart.png?raw=true "wpstart")
+
+Now go to Settings > Permalinks. By default, WordPress is set to Day and name, which is a really ugly URL structure. Click on Post name and apply the changes.
+
+
+### The Loop
+
+The most exciting part is being able to dynamically insert content, and in WordPress we do that with The Loop. It’s the most important function of WordPress. All of your content is generated through a loop.
+
+In the dashboard, if you click on Posts, you will see a `“Hello, world!”` post in there by default. Our goal is to display that post in the blog.
+
+The Loop itself is quite simple.
+
+```
+<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
+
+<!-- contents of the loop -->
+
+<?php endwhile; endif; ?>
+```
+
+It explains itself – IF there are posts, WHILE there are posts, DISPLAY the post. Anything inside the loop will be repeated. For a blog, this will be the post title, the date, the content, and comments. Where each individual post should end is where the loop will end. We’re going to add the loop to index.php.
+
+Here’s your new index file.
+
+```
+<?php get_header(); ?>
+
+	<div class="row">
+
+		<div class="col-sm-8 blog-main">
+
+			<?php
+			if ( have_posts() ) : while ( have_posts() ) : the_post();
+
+				get_template_part( 'content', get_post_format() );
+
+			endwhile; endif;
+			?>
+
+		</div> <!-- /.blog-main -->
+
+		<?php get_sidebar(); ?>
+
+	</div> <!-- /.row -->
+
+<?php get_footer(); ?>
+```
+
+The only thing inside your loop is `content.php`, which will contain the contents of one single post. So open `content.php` and change the contents to this:
+
+```
+<div class="blog-post">
+	<h2 class="blog-post-title"><?php the_title(); ?></h2>
+	<p class="blog-post-meta"><?php the_date(); ?> by <a href="#"><?php the_author(); ?></a></p>
+
+ <?php the_content(); ?>
+
+</div><!-- /.blog-post -->
+```
+
+It’s amazingly simple! `the_title();` is the title of the blog post, `the_date();` shows the date, `the_author(); the author`, and `the_content();` is your post content. I added another post to prove at the loop is working.
