@@ -465,3 +465,32 @@ Fortunately, this is a very easy fix. I’m just going to apply the style from o
 ![alt text](https://github.com/RavensbourneWebMedia/MagazineMashUp/blob/2016/session%209/images/list2.png?raw=true "muchvetter")
 
 Much better.
+
+### Page
+– page.php
+
+I want the pages to have a different layout than the blog posts; I don’t want sidebars on them. Think of index.php as the blog-index and page.php as the page-index. I’m going to create page.php, which will be very similar to the index except have a full 12-wide grid instead of an 8-wide content and 4-wide sidebar.
+
+```
+<?php get_header(); ?>
+
+	<div class="row">
+		<div class="col-sm-12">
+
+			<?php
+				if ( have_posts() ) : while ( have_posts() ) : the_post();
+
+					get_template_part( 'content', get_post_format() );
+
+				endwhile; endif;
+			?>
+
+		</div> <!-- /.col -->
+	</div> <!-- /.row -->
+
+<?php get_footer(); ?>
+```
+
+When I click on my sample page, the layout is now different than the blog post layout.
+
+![alt text](https://github.com/RavensbourneWebMedia/MagazineMashUp/blob/2016/session%209/images/list2.png?raw=true "muchvetter")
