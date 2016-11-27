@@ -113,3 +113,27 @@ Remember the Bootstrap blog source code from earlier in the article? Move those 
 Your theme has now been created. Go to the WordPress dashboard, and click on `Appearance > Themes`. You’ll see the theme in the collection with all the default themes.
 
 ![alt text](https://github.com/RavensbourneWebMedia/MagazineMashUp/blob/2016/session%209/images/startwp.png?raw=true "startwp")
+
+
+
+
+
+Activate the theme and go back to your main URL. Yep, it’s that simple. You’ve technically created a custom theme already. Of course, it doesn’t do anything yet beyond what a static HTML site can do, but you’re all set up now.
+
+There is one thing you might notice – `blog.css` is not being loaded. Bootstrap’s main CSS and JS files are loading via CDN, but my local css file isn’t loading. Why?
+
+My local URL may be `startwordpress.dev/`, but it’s really pulling from `wp-content/themes/startwordpress`. If I link to `blog.css` with `<link href="blog.css">`, it tries to load `startwordpress.dev/blog.css`, which does not exist. **Learn right now that you can never link to anything in a WordPress page without some PHP.**
+
+Fortunately, this is easily remedied. There’s a few ways to do this, but I’ll show you the easiest way to start.
+
+Locate where you linked to the CSS stylesheet in the head of `index.php`.
+
+```
+<link href="blog.css" rel="stylesheet">
+```
+
+We need to tell it to dynamically link to the themes folder. Replace your code with this.
+
+```
+<link href="<?php bloginfo('template_directory');?>/blog.css" rel="stylesheet">
+```
