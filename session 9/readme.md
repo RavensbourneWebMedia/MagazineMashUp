@@ -111,3 +111,5 @@ Tags: bootstrap
 Remember the Bootstrap blog source code from earlier in the article? Move those two files – `index.html` and `blog.css` – to your custom theme folder. Rename `index.html` to `index.php`.
 
 Your theme has now been created. Go to the WordPress dashboard, and click on `Appearance > Themes`. You’ll see the theme in the collection with all the default themes.
+
+![alt text](https://github.com/RavensbourneWebMedia/MagazineMashUp/blob/2016/session%209/images/startwp.png?raw=true "startwp")
