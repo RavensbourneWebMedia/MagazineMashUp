@@ -308,7 +308,7 @@ Before we start pulling in posts and pages, we need to configure some main setti
 
 In your dashboard, go to Settings > General. Set your title.
 
-In `header.php`, change the contents of the title tag and main h1 tag to this code:
+In header.php, change the contents of the title tag and main h1 tag to this code:
 
 ``` <?php echo get_bloginfo( 'name' ); ?>
 ```
