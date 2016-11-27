@@ -81,22 +81,33 @@ Now, when you go back to your website and refresh, you should see this screen.
 
 You’ll have to input a few things – username, password, e-mail address, and then you’re done. Congratulations, you have successfully installed WordPress! You will be redirected to `/wp-login.php`, where you can input your credentials to log into the backend. If you go to your main URL, You will see the default WordPress blog and “Hello, World!” post.
 
-
 ### Creating your custom theme
 
 Outside of configuring WordPress, almost everything you do in WordPress will be in the `wp-content` folder; everything else is core code, and you don’t want to mess with that.
 
-
 From this point on, the WordPress Codex and StackOverflow will become your best friends. I’ll show you how to build a basic theme, but how you choose to customize your themes beyond that is totally up to you.
-
 
 In Finder, follow the path of `wp-content > themes` to arrive at your themes folder. You’ll see the WordPress default themes – `twentyfifteen`, `twentyfourteen`, `twentythirteen` – and `index.php`. Create a new directory for your theme; I called mine startwordpress.
 
-
 > A WordPress theme needs only two files to exist – `style.css` and `index.php`.
-
 
 
 **style.css**
 
 In your custom theme folder, create style.css. It simply contains a comment that alerts WordPress that a theme exists here. Change the name, author, description, and so on.
+
+```
+/*
+Theme Name: Start WordPress
+Author: Tania Rascia
+Description: Bootstrap Blog template converted to WordPress
+Version: 0.0.1
+Tags: bootstrap
+*/
+```
+
+**index.php**
+
+Remember the Bootstrap blog source code from earlier in the article? Move those two files – `index.html` and `blog.css` – to your custom theme folder. Rename `index.html` to `index.php`.
+
+Your theme has now been created. Go to the WordPress dashboard, and click on `Appearance > Themes`. You’ll see the theme in the collection with all the default themes.
