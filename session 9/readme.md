@@ -306,4 +306,4 @@ If you re-load your URL, your entire site is now loaded, just as before. You wil
 
 Before we start pulling in posts and pages, we need to configure some main settings of WordPress. For example, my title right now is “The Bootstrap Blog”, hard coded in HTML. I want the <title> and h1 of my site to be changeable through the back end.
 
-In your dashboard, go to Settings > General. Set your title.
+In your dashboard, go to `Settings > General.` Set your title.
