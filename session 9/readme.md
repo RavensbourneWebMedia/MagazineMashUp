@@ -461,3 +461,7 @@ Fortunately, this is a very easy fix. I’m just going to apply the style from o
     color: #fff;
 }
 ```
+
+![alt text](https://github.com/RavensbourneWebMedia/MagazineMashUp/blob/2016/session%209/images/list2.png?raw=true "muchvetter")
+
+Much better.
