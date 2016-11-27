@@ -401,3 +401,25 @@ The only thing inside your loop is `content.php`, which will contain the content
 ```
 
 It’s amazingly simple! `the_title();` is the title of the blog post, `the_date();` shows the date, `the_author(); the author`, and `the_content();` is your post content. I added another post to prove at the loop is working.
+
+![alt text](https://github.com/RavensbourneWebMedia/MagazineMashUp/blob/2016/session%209/images/addanotherpost.png?raw=true "addpost")
+
+Awesome. Let’s make the sidebar dynamic, as well. There should be a description and archive list in the sidebar. In the dashboard, I’m going to edit my user description to say “Front end web developer and professional nerd.”
+
+Delete all the lis under Archives and change it to this code.
+
+```
+<h4>Archives</h4>
+<ol class="list-unstyled">
+	<?php wp_get_archives( 'type=monthly' ); ?>
+</ol>
+```
+
+For my description, I’m going to pull in metadata from my user account.
+
+```
+<h4>About</h4>
+<p><?php the_author_meta( 'description' ); ?> </p>
+```
+
+Now this content is being pulled in dynamically as well.
