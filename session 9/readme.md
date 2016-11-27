@@ -300,39 +300,3 @@ Now we’re going to add everything back in. Here’s your new `index.php`.
 Even if you’ve never used PHP before, this code is all very self explanatory. `get_header();`, `get_sidebar();` and `get_footer();` are all functions that look for their respective .php files and insert the code. Of course, they all go inside their own `<?php ?>` tags to let the server know to parse them as HTML. The content function is slightly different, but it does the same thing.
 
 If you re-load your URL, your entire site is now loaded, just as before. You will notice a top bar if you’re logged in to the back end.
-
-
-### Main Settings ###
-
-Before we start pulling in posts and pages, we need to configure some main settings of WordPress. For example, my title right now is “The Bootstrap Blog”, hard coded in HTML. I want the <title> and h1 of my site to be changeable through the back end.
-
-In your dashboard, go to Settings > General. Set your title.
-
-In header.php, change the contents of the title tag and main h1 tag to this code:
-
-```
-<?php echo get_bloginfo( 'name' ); ?>
-```
-
-And the description to this one.
-
-```
-<?php echo get_bloginfo( 'description' ); ?>
-```
-
-Finally, I want the title to always take me back to the main blog page. bloginfo('wpurl'); is the code that will do that.
-
-```
-<a href="<?php bloginfo( 'wpurl' );?>"><!-- site title --></a>
-```
-
-Here’s the full code in case you’re confused.
-
-```
-<div class="blog-header">
-	<h1 class="blog-title"><a href="<?php bloginfo( 'wpurl' );?>"><?php echo get_bloginfo( 'name' ); ?></a></h1>
-	<p class="lead blog-description"><?php echo get_bloginfo( 'description' ); ?></p>
-</div>
-```
-
-We’ve finally made the first dynamic change to the page. The front end should reflect what you put in your settings.
