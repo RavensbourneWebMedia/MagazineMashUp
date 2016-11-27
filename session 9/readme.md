@@ -308,8 +308,6 @@ Before we start pulling in posts and pages, we need to configure some main setti
 
 In your dashboard, go to `Settings > General`. Set your title.
 
-![alt text](https://github.com/RavensbourneWebMedia/MagazineMashUp/blob/2016/session%209/images/starttheme.png?raw=true "starttheme")
-
 In `header.php`, change the contents of the title tag and main h1 tag to this code:
 
 ```
