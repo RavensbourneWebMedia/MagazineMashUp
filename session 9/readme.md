@@ -426,3 +426,38 @@ Here’s my blog so far.
 
 
 ![alt text](https://github.com/RavensbourneWebMedia/MagazineMashUp/blob/2016/session%209/images/theblogsofar.png?raw=true "sofar")
+
+### Menu and Pages
+
+Okay. Now we know how to make a blog, and edit some sidebar content. Only one main aspect of this page remains – the navigation, and where it leads. Well, there are two main aspects to WordPress – Posts and Pages. They’re very similar in that they both use the Loop. However, pages are where you put content that isn’t a blog post. This is where the CMS aspect of WordPress comes in – each individual page can be as customized as you want.
+
+In the dashboard, I added a page so we can see two. First, we’re going to edit the navbar so that the links lead to the pages. Back in header.php, find and change this code.
+
+```
+<div class="blog-masthead">
+	<div class="container">
+		<nav class="blog-nav">
+			<a class="blog-nav-item active" href="#">Home</a>
+			<?php wp_list_pages( '&title_li=' ); ?>
+		</nav>
+	</div>
+</div>
+```
+
+`wp_list_pages();` will list all the pages you have in an unordered list. `'title_li='` is telling the code not to add a “Pages” title before the list. Unfortunately for us, this looks terrible; the original `blog.css` has the links coded in `a` tags, not `li` tags.
+
+![alt text](https://github.com/RavensbourneWebMedia/MagazineMashUp/blob/2016/session%209/images/list1.png?raw=true "tags")
+
+Fortunately, this is a very easy fix. I’m just going to apply the style from one to the other. Add this to blog.css
+
+```
+.blog-nav li {
+    position: relative;
+    display: inline-block;
+    padding: 10px;
+    font-weight: 500;
+}
+.blog-nav li a {
+    color: #fff;
+}
+```
