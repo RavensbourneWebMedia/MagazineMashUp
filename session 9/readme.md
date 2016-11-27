@@ -493,4 +493,4 @@ I want the pages to have a different layout than the blog posts; I don’t want 
 
 When I click on my sample page, the layout is now different than the blog post layout.
 
-![alt text](https://github.com/RavensbourneWebMedia/MagazineMashUp/blob/2016/session%209/images/list2.png?raw=true "muchvetter")
+![alt text](https://github.com/RavensbourneWebMedia/MagazineMashUp/blob/2016/session%209/images/page.png?raw=true "page")
