@@ -122,7 +122,9 @@ Activate the theme and go back to your main URL. Yep, it’s that simple. You’
 
 There is one thing you might notice – `blog.css` is not being loaded. Bootstrap’s main CSS and JS files are loading via CDN, but my local css file isn’t loading. Why?
 
-My local URL may be `startwordpress.dev/`, but it’s really pulling from `wp-content/themes/startwordpress`. If I link to `blog.css` with `<link href="blog.css">`, it tries to load `startwordpress.dev/blog.css`, which does not exist. **Learn right now that you can never link to anything in a WordPress page without some PHP.**
+My local URL may be `startwordpress.dev/`, but it’s really pulling from `wp-content/themes/startwordpress`. If I link to `blog.css` with `<link href="blog.css">`, it tries to load `startwordpress.dev/blog.css`, which does not exist.
+
+**Learn right now that you can never link to anything in a WordPress page without some PHP.**
 
 Fortunately, this is easily remedied. There’s a few ways to do this, but I’ll show you the easiest way to start.
 
@@ -137,3 +139,67 @@ We need to tell it to dynamically link to the themes folder. Replace your code w
 ```
 <link href="<?php bloginfo('template_directory');?>/blog.css" rel="stylesheet">
 ```
+
+
+
+
+
+If you reload the page, you’ll see that CSS is now loading in. The concept will be the same for images, javascript, and most other files you have in the themes folder, except PHP files.
+
+    > Note that this is not the most correct way to load scripts into your site. It’s the easiest to understand and it works, so it’s how we’ll do it for now.
+
+Dividing your page into sections
+
+Right now, everything is in `index.php`. But obviously we want the header, footer and sidebar on all the pages to be the same, right? (Maybe some pages will have slight customization, but that comes later.)
+
+We’re going to divide `index.php` into four sections – `header.php`, `footer.php`, `sidebar.php` and `content.php`.
+
+Here’s the original `index.php`. Now we start cutting and pasting.
+
+**Header – header.php**
+
+Everything from `<!DOCTYPE html>` to the main blog header will be in the header file. The header usually contains all the necessary head styles and the top navigation to the website. The only addition I will make to the code is adding `<?php wp_head(); ?>` right before the closing `</head>`.
+
+```
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>Blog Template for Bootstrap</title>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+	<link href="<?php bloginfo('template_directory');?>/blog.css" rel="stylesheet">
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	<?php wp_head();?>
+</head>
+
+<body>
+
+	<div class="blog-masthead">
+		<div class="container">
+			<nav class="blog-nav">
+				<a class="blog-nav-item active" href="#">Home</a>
+				<a class="blog-nav-item" href="#">New features</a>
+				<a class="blog-nav-item" href="#">Press</a>
+				<a class="blog-nav-item" href="#">New hires</a>
+				<a class="blog-nav-item" href="#">About</a>
+			</nav>
+		</div>
+	</div>
+
+	<div class="container">
+
+		<div class="blog-header">
+			<h1 class="blog-title">The Bootstrap Blog</h1>
+			<p class="lead blog-description">The official example template of creating a blog with Bootstrap.</p>
+		</div>
+    ```
