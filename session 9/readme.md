@@ -203,3 +203,109 @@ Everything from `<!DOCTYPE html>` to the main blog header will be in the header 
 			<p class="lead blog-description">The official example template of creating a blog with Bootstrap.</p>
 		</div>
     ```
+
+    >
+    >
+
+    **Footer – footer.php**
+
+Same deal for the footer as the header. It will include whatever visible footer you have, your JS links (for now) and `<?php wp_footer(); ?>` right before `</body>`. Since I included the .container div in the header, I’m going to close it in the footer.
+
+
+    ```
+    </div> <!-- /.container -->
+
+		<footer class="blog-footer">
+      <p>Blog template built for <a href="http://getbootstrap.com">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+      <p>
+        <a href="#">Back to top</a>
+      </p>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<?php wp_footer(); ?>
+  </body>
+</html>
+    ```
+
+**Sidebar – sidebar.php**
+
+Most websites, especially blogs, will have a side area for including content such as archives, tags, categories, ads, and whatnot. (Content removed for brevity.)
+
+    ```
+<div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+	<div class="sidebar-module sidebar-module-inset">
+		<h4>About</h4>
+		<p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+	</div>
+	<div class="sidebar-module">
+		<h4>Archives</h4>
+		<ol class="list-unstyled">
+			<li><a href="#">March 2014</a></li>
+			<!-- More archive examples -->
+		</ol>
+	</div>
+	<div class="sidebar-module">
+		<h4>Elsewhere</h4>
+		<ol class="list-unstyled">
+			<li><a href="#">GitHub</a></li>
+			<li><a href="#">Twitter</a></li>
+			<li><a href="#">Facebook</a></li>
+		</ol>
+	</div>
+</div><!-- /.blog-sidebar -->
+    ```
+
+**Content – content.php**
+
+If the sidebar is where all the secondary information goes, the content is where all the articles and main content of the website go. (Content removed for brevity.)
+
+    ```
+<div class="blog-post">
+	<h2 class="blog-post-title">Sample blog post</h2>
+	<p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
+
+	<p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
+	<hr>
+
+<!-- the rest of the content -->
+
+</div><!-- /.blog-post -->
+    ```
+
+**Index**
+
+The index file should be pretty sparse now. In fact, it should only be this:
+
+    ```
+<div class="row">
+	<div class="col-sm-8 blog-main">
+	</div> <!-- /.blog-main -->
+</div> 	<!-- /.row -->
+    ```
+
+Now we’re going to add everything back in. Here’s your new `index.php`.
+
+    ```
+<?php get_header(); ?>
+
+	<div class="row">
+
+		<div class="col-sm-8 blog-main">
+
+			<?php get_template_part( 'content', get_post_format() ); ?>
+
+		</div> <!-- /.blog-main -->
+
+		<?php get_sidebar(); ?>
+
+	</div> <!-- /.row -->
+
+<?php get_footer(); ?>
+
+    ```
+
+Even if you’ve never used PHP before, this code is all very self explanatory. `get_header();`, `get_sidebar();` and `get_footer();` are all functions that look for their respective .php files and insert the code. Of course, they all go inside their own `<?php ?>` tags to let the server know to parse them as HTML. The content function is slightly different, but it does the same thing.
+
+If you re-load your URL, your entire site is now loaded, just as before. You will notice a top bar if you’re logged in to the back end.
