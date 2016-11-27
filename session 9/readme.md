@@ -308,4 +308,32 @@ Before we start pulling in posts and pages, we need to configure some main setti
 
 In your dashboard, go to Settings > General. Set your title.
 
+
 In header.php, change the contents of the title tag and main h1 tag to this code:
+
+```
+<?php echo get_bloginfo( 'name' ); ?>
+```
+
+And the description to this one.
+
+```
+<?php echo get_bloginfo( 'description' ); ?>
+```
+
+Finally, I want the title to always take me back to the main blog page. bloginfo('wpurl'); is the code that will do that.
+
+```
+<a href="<?php bloginfo( 'wpurl' );?>"><!-- site title --></a>
+```
+
+Here’s the full code in case you’re confused.
+
+```
+<div class="blog-header">
+	<h1 class="blog-title"><a href="<?php bloginfo( 'wpurl' );?>"><?php echo get_bloginfo( 'name' ); ?></a></h1>
+	<p class="lead blog-description"><?php echo get_bloginfo( 'description' ); ?></p>
+</div>
+```
+
+We’ve finally made the first dynamic change to the page. The front end should reflect what you put in your settings.
