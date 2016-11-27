@@ -199,7 +199,7 @@ Everything from `<!DOCTYPE html>` to the main blog header will be in the header 
 		</div>
 ```
 
-    **Footer – footer.php**
+**Footer – footer.php**
 
 Same deal for the footer as the header. It will include whatever visible footer you have, your JS links (for now) and `<?php wp_footer(); ?>` right before `</body>`. Since I included the .container div in the header, I’m going to close it in the footer.
 
