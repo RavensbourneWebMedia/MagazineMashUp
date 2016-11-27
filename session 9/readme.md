@@ -29,3 +29,42 @@ Create a database
 4. Now, if you go to your local server in the browser, assuming the servers are on and everything is pointed to the right direction, you’ll get this message.
 
 ![alt text](https://github.com/RavensbourneWebMedia/MagazineMashUp/blob/2016/session%209/images/errorwp.png?raw=true "error message")
+
+### Configure WordPress
+
+Alright, final step. Find wp-config-sample.php in your directory.
+
+[It will look exactly like this.](https://github.com/RavensbourneWebMedia/MagazineMashUp/blob/2016/session%209/wp-config-sample.php "It will look exactly like this.")
+
+Don’t be nervous. Change the database name, username, and password, from this:
+
+``` /** The name of the database for WordPress */
+define('DB_NAME', 'database_name_here');
+/** MySQL database username */
+define('DB_USER', 'username_here');
+/** MySQL database password */
+define('DB_PASSWORD', 'password_here');
+```
+
+to this:
+
+```
+/** The name of the database for WordPress */
+define('DB_NAME', 'startwordpress');
+/** MySQL database username */
+define('DB_USER', 'root');
+/** MySQL database password */
+define('DB_PASSWORD', 'root');
+```
+
+Find this:
+
+```
+$table_prefix  = 'wp_';
+```
+
+And change it to literally anything else with numbers and letters. For security. ‘xyz_’ or “735hjq9_”, etc.
+
+```
+$table_prefix  = 'xyz77_';
+```
