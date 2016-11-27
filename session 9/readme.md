@@ -302,7 +302,7 @@ Even if you’ve never used PHP before, this code is all very self explanatory. 
 If you re-load your URL, your entire site is now loaded, just as before. You will notice a top bar if you’re logged in to the back end.
 
 
-###Main Settings###
+### Main Settings ###
 
 Before we start pulling in posts and pages, we need to configure some main settings of WordPress. For example, my title right now is “The Bootstrap Blog”, hard coded in HTML. I want the <title> and h1 of my site to be changeable through the back end.
 
