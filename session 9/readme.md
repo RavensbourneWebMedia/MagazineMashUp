@@ -422,4 +422,7 @@ For my description, I’m going to pull in metadata from my user account.
 <p><?php the_author_meta( 'description' ); ?> </p>
 ```
 
-Now this content is being pulled in dynamically as well.
+Here’s my blog so far.
+
+
+![alt text](https://github.com/RavensbourneWebMedia/MagazineMashUp/blob/2016/session%209/images/theblogsofar.png?raw=true "sofar")
