@@ -45,7 +45,7 @@ define('DB_NAME', 'database_name_here');
 define('DB_USER', 'username_here');
 /** MySQL database password */
 define('DB_PASSWORD', 'password_here');
-
+```
 
 to this:
 
@@ -56,15 +56,16 @@ define('DB_NAME', 'startwordpress');
 define('DB_USER', 'root');
 /** MySQL database password */
 define('DB_PASSWORD', 'root');
-
+```
 
 Find this:
 
 ```
 $table_prefix  = 'wp_';
-
+```
 
 And change it to literally anything else with numbers and letters. For security. ‘xyz_’ or “735hjq9_”, etc.
 
 ```
 $table_prefix  = 'xyz77_';
+``` 
