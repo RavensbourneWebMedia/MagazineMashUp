@@ -148,7 +148,7 @@ We need to tell it to dynamically link to the themes folder. Replace your code w
 
 If you reload the page, you’ll see that CSS is now loading in. The concept will be the same for images, javascript, and most other files you have in the themes folder, except PHP files.
 
-    > Note that this is not the most correct way to load scripts into your site. It’s the easiest to understand and it works, so it’s how we’ll do it for now.
+> Note that this is not the most correct way to load scripts into your site. It’s the easiest to understand and it works, so it’s how we’ll do it for now.
 
 Dividing your page into sections
 
