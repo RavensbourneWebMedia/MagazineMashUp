@@ -16,8 +16,6 @@ I have nicely set one up on [git for you](https://github.com/RavensbourneWebMedi
  already.
 
 
-
-
 ### Installing 
 
 **Create a place for WordPress to live**
@@ -33,8 +31,6 @@ Create a database
 4. Now, if you go to your local server in the browser, assuming the servers are on and everything is pointed to the right direction, you’ll get this message.
 
 ![alt text](https://github.com/RavensbourneWebMedia/MagazineMashUp/blob/2016/session%209/images/errorwp.png?raw=true "error message")
-
-
 
 
 ## Configure WordPress
@@ -89,8 +85,6 @@ Now, when you go back to your website and refresh, you should see this screen.
 You’ll have to input a few things – username, password, e-mail address, and then you’re done. Congratulations, you have successfully installed WordPress! You will be redirected to `/wp-login.php`, where you can input your credentials to log into the backend. If you go to your main URL, You will see the default WordPress blog and “Hello, World!” post.
 
 
-
-
 ## Creating your custom theme
 
 Outside of configuring WordPress, almost everything you do in WordPress will be in the `wp-content` folder; everything else is core code, and you don’t want to mess with that.
@@ -100,7 +94,6 @@ From this point on, the WordPress Codex and StackOverflow will become your best 
 In Finder, follow the path of `wp-content > themes` to arrive at your themes folder. You’ll see the WordPress default themes – `twentyfifteen`, `twentyfourteen`, `twentythirteen` – and `index.php`. Create a new directory for your theme; I called mine startwordpress.
 
 > A WordPress theme needs only two files to exist – `style.css` and `index.php`.
-
 
 
 ### style.css
@@ -133,7 +126,9 @@ There is one thing you might notice – `blog.css` is not being loaded. Bootstra
 
 My local URL may be `startwordpress.dev/`, but it’s really pulling from `wp-content/themes/startwordpress`. If I link to `blog.css` with `<link href="blog.css">`, it tries to load `startwordpress.dev/blog.css`, which does not exist.
 
+
 **Learn right now that you can never link to anything in a WordPress page without some PHP.**
+
 
 Fortunately, this is easily remedied. There’s a few ways to do this, but I’ll show you the easiest way to start.
 
@@ -162,7 +157,6 @@ Right now, everything is in `index.php`. But obviously we want the header, foote
 We’re going to divide `index.php` into four sections – `header.php`, `footer.php`, `sidebar.php` and `content.php`.
 
 Here’s the original `index.php`. Now we start cutting and pasting.
-
 
 
 ### Header – header.php
@@ -214,8 +208,7 @@ Everything from `<!DOCTYPE html>` to the main blog header will be in the header 
 ```
 
 
-
-###Footer – footer.php 
+### Footer – footer.php 
 
 Same deal for the footer as the header. It will include whatever visible footer you have, your JS links (for now) and `<?php wp_footer(); ?>` right before `</body>`. Since I included the .container div in the header, I’m going to close it in the footer.
 
@@ -236,7 +229,6 @@ Same deal for the footer as the header. It will include whatever visible footer 
   </body>
 </html>
 ```
-
 
 
 ### Sidebar – sidebar.php 
@@ -268,7 +260,6 @@ Most websites, especially blogs, will have a side area for including content suc
 ```
 
 
-
 ### Content – content.php
 
 If the sidebar is where all the secondary information goes, the content is where all the articles and main content of the website go. (Content removed for brevity.)
@@ -285,7 +276,6 @@ If the sidebar is where all the secondary information goes, the content is where
 
 </div><!-- /.blog-post -->
 ```
-
 
 
 ### Index
@@ -322,8 +312,6 @@ Now we’re going to add everything back in. Here’s your new `index.php`.
 Even if you’ve never used PHP before, this code is all very self explanatory. `get_header();`, `get_sidebar();` and `get_footer();` are all functions that look for their respective .php files and insert the code. Of course, they all go inside their own `<?php ?>` tags to let the server know to parse them as HTML. The content function is slightly different, but it does the same thing.
 
 If you re-load your URL, your entire site is now loaded, just as before. You will notice a top bar if you’re logged in to the back end.
-
-
 
 
 ## Main Settings
@@ -368,9 +356,7 @@ We’ve finally made the first dynamic change to the page. The front end should 
 Now go to Settings > Permalinks. By default, WordPress is set to Day and name, which is a really ugly URL structure. Click on Post name and apply the changes.
 
 
-
-
-### The Loop
+## The Loop
 
 The most exciting part is being able to dynamically insert content, and in WordPress we do that with The Loop. It’s the most important function of WordPress. All of your content is generated through a loop.
 
