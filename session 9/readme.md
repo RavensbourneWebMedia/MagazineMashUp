@@ -6,7 +6,7 @@ You can find [MAMP](https://www.mamp.info/en/downloads/) here.
 
 What is MAMP?
 
-I local host on your computer.
+It is local host on your computer (Mac of course).
 
 ### Download Bootstrap blog theme
 
