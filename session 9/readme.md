@@ -37,7 +37,7 @@ Create a database
 
 
 
-### Configure WordPress
+## Configure WordPress
 
 Alright, final step. Find wp-config-sample.php in your directory.
 
@@ -91,7 +91,7 @@ You’ll have to input a few things – username, password, e-mail address, and 
 
 
 
-### Creating your custom theme
+## Creating your custom theme
 
 Outside of configuring WordPress, almost everything you do in WordPress will be in the `wp-content` folder; everything else is core code, and you don’t want to mess with that.
 
@@ -326,7 +326,7 @@ If you re-load your URL, your entire site is now loaded, just as before. You wil
 
 
 
-### Main Settings
+## Main Settings
 
 Before we start pulling in posts and pages, we need to configure some main settings of WordPress. For example, my title right now is `“The Bootstrap Blog”`, hard coded in HTML. I want the `<title>` and `h1` of my site to be changeable through the back end.
 
@@ -453,7 +453,7 @@ Here’s the blog so far.
 
 ![alt text](https://github.com/RavensbourneWebMedia/MagazineMashUp/blob/2016/session%209/images/theblogsofar.png?raw=true "sofar")
 
-### Menu and Pages
+## Menu and Pages
 
 Okay. Now we know how to make a blog, and edit some sidebar content. Only one main aspect of this page remains – the navigation, and where it leads. Well, there are two main aspects to WordPress – Posts and Pages. They’re very similar in that they both use the Loop. However, pages are where you put content that isn’t a blog post. This is where the CMS aspect of WordPress comes in – each individual page can be as customized as you want.
 
