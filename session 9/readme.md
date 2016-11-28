@@ -108,7 +108,7 @@ In your custom theme folder, create style.css. It simply contains a comment that
 ```
 /*
 Theme Name: Start WordPress
-Author: Tania Rascia
+Author: Tor Njamo
 Description: Bootstrap Blog template converted to WordPress
 Version: 0.0.1
 Tags: bootstrap
