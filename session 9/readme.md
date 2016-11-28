@@ -12,7 +12,9 @@ It is local host on your computer (Mac of course).
 
 This is one of the default themes on [Bootstrap’s official website.](http://getbootstrap.com/examples/blog/ "Bootstrap’s official website")
 
-I have nicely set one up on git for you already.
+I have nicely set one up on [git for you](https://github.com/RavensbourneWebMedia/MagazineMashUp/tree/2016/session%209/bootstrapblog "gitgitbootstrap")
+ already.
+
 
 
 
