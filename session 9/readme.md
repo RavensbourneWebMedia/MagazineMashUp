@@ -103,7 +103,7 @@ In Finder, follow the path of `wp-content > themes` to arrive at your themes fol
 
 
 
-**style.css**
+### style.css
 
 In your custom theme folder, create style.css. It simply contains a comment that alerts WordPress that a theme exists here. Change the name, author, description, and so on.
 
@@ -118,7 +118,7 @@ Tags: bootstrap
 ```
 
 
-**index.php**
+### index.php
 
 Remember the Bootstrap blog source code from earlier in the article? Move those two files – `index.html` and `blog.css` – to your custom theme folder. Rename `index.html` to `index.php`.
 
@@ -165,7 +165,7 @@ Here’s the original `index.php`. Now we start cutting and pasting.
 
 
 
-**Header – header.php**
+### Header – header.php
 
 Everything from `<!DOCTYPE html>` to the main blog header will be in the header file. The header usually contains all the necessary head styles and the top navigation to the website. The only addition I will make to the code is adding `<?php wp_head(); ?>` right before the closing `</head>`.
 
@@ -215,7 +215,7 @@ Everything from `<!DOCTYPE html>` to the main blog header will be in the header 
 
 
 
-**Footer – footer.php**
+###Footer – footer.php 
 
 Same deal for the footer as the header. It will include whatever visible footer you have, your JS links (for now) and `<?php wp_footer(); ?>` right before `</body>`. Since I included the .container div in the header, I’m going to close it in the footer.
 
@@ -239,7 +239,7 @@ Same deal for the footer as the header. It will include whatever visible footer 
 
 
 
-**Sidebar – sidebar.php**
+### Sidebar – sidebar.php 
 
 Most websites, especially blogs, will have a side area for including content such as archives, tags, categories, ads, and whatnot. (Content removed for brevity.)
 
@@ -269,7 +269,7 @@ Most websites, especially blogs, will have a side area for including content suc
 
 
 
-**Content – content.php**
+### Content – content.php
 
 If the sidebar is where all the secondary information goes, the content is where all the articles and main content of the website go. (Content removed for brevity.)
 
@@ -288,7 +288,7 @@ If the sidebar is where all the secondary information goes, the content is where
 
 
 
-**Index**
+### Index
 
 The index file should be pretty sparse now. In fact, it should only be this:
 
