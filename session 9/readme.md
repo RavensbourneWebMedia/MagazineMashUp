@@ -616,3 +616,78 @@ By default, 10 posts will show up on a page before it will link to another page.
 Now we have functioning pagination.
 
 
+
+### Comments
+
+
+One of the biggest advantages WordPress and server based content management systems have over static site generators is the ability to include comments without using a third party. (However, static site generators have many more advantages.
+
+Comments seem complicated to set up, but it doesn’t have to be hard at all. First, we’re going to go back to `single.php` and enable the comments.
+
+Right now, the code looks like this.
+
+```
+if ( have_posts() ) : while ( have_posts() ) : the_post();
+	get_template_part( 'content-single', get_post_format() );
+endwhile; endif; 
+We’re going to change it to look like this.
+
+if ( have_posts() ) : while ( have_posts() ) : the_post();
+	get_template_part( 'content-single', get_post_format() );
+
+	if ( comments_open() || get_comments_number() ) :
+	  comments_template();
+	endif;
+
+endwhile; endif; 
+```
+
+This is just telling the single post to display the comments template. Now we’ll create `comments.php`.
+
+```
+<?php if ( post_password_required() ) {
+	return;
+} ?>
+	<div id="comments" class="comments-area">
+		<?php if ( have_comments() ) : ?>
+			<h3 class="comments-title">
+				<?php
+				printf( _nx( 'One comment on “%2$s”', '%1$s comments on “%2$s”', get_comments_number(), 'comments title'),
+					number_format_i18n( get_comments_number() ), get_the_title() );
+				?>
+			</h3>
+			<ul class="comment-list">
+				<?php 
+				wp_list_comments( array(
+					'short_ping'  => true,
+					'avatar_size' => 50,
+				) );
+				?>
+			</ul>
+		<?php endif; ?>
+		<?php if ( ! comments_open() && get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) : ?>
+			<p class="no-comments">
+				<?php _e( 'Comments are closed.' ); ?>
+			</p>
+		<?php endif; ?>
+		<?php comment_form(); ?>
+	</div>
+```
+
+Comments are not the simplest part of WordPress theming, but I’ve managed to reduce it down to a small enough code block.
+
+First, we’re setting functionality to prevent users from posting comments if you’ve set your settings to password protected comments `(post_password_required())`. Then we’re creating a comments div, and if there are comments `(have_comments())`, it will display how many comments there are on the post `(get_comments_number())`, followed by the list of comments `(wp_list_comments())`. If the comments are closed `(! comments_open())`, it will let you know; at the end will be the form to submit a comment `(comment_form())`.
+
+Without adding any styles, here is how the functioning single blog post looks.
+
+Obviously the styles aren’t quite there yet, but I don’t want to focus on that in this session. Remove the list-style on the uls, add some padding and margins and possibly some borders and background colors, and you’ll have a much prettier comment setup.
+
+Of course, you might want to show how many comments there are or link to the comments from the main page. You can do that with this code inserted into `content.php`.
+
+```
+<a href="<?php comments_link(); ?>">
+	<?php
+	printf( _nx( 'One Comment', '%1$s Comments', get_comments_number(), 'comments title', 'textdomain' ), number_format_i18n( 						get_comments_number() ) ); ?>
+</a>
+```
+
