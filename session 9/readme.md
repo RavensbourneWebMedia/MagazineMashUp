@@ -680,6 +680,9 @@ First, we’re setting functionality to prevent users from posting comments if y
 
 Without adding any styles, here is how the functioning single blog post looks.
 
+
+![alt text](https://github.com/RavensbourneWebMedia/MagazineMashUp/blob/2016/session%209/images/Asset.jpg "comments")
+
 Obviously the styles aren’t quite there yet, but I don’t want to focus on that in this session. Remove the list-style on the uls, add some padding and margins and possibly some borders and background colors, and you’ll have a much prettier comment setup.
 
 Of course, you might want to show how many comments there are or link to the comments from the main page. You can do that with this code inserted into `content.php`.
