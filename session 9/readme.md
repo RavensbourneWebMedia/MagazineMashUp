@@ -558,3 +558,10 @@ Using the_permalink(), we’re going to link to the single page.
 
 Now you have a blog posts on the main page that are linking individual blog post page.
 
+Finally, we’ll want to change `the_content()` to `the_excerpt()` on `content.php`. The excerpt will only show the first 55 words of your post, instead of the entire contents.
+
+```
+<?php the_excerpt(); ?>
+```
+
+### Pagination
