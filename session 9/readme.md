@@ -510,3 +510,51 @@ When I click on my sample page, the layout is now different than the blog post l
 ![alt text](https://github.com/RavensbourneWebMedia/MagazineMashUp/blob/2016/session%209/images/page.png?raw=true "page")
 
 
+### Individual Post Pages
+
+We have made header, footer, sidebar, content, and page files. Now we’re going to make `single.php`, which is an individual post page. It’s going to be an exact duplicate of `page.php`, except I’m going to change `'content'` to `'content-single'`.
+
+```
+<?php get_header(); ?>
+
+	<div class="row">
+		<div class="col-sm-12">
+
+			<?php 
+				if ( have_posts() ) : while ( have_posts() ) : the_post();
+					get_template_part( 'content-single', get_post_format() );
+				endwhile; endif; 
+			?>
+
+		</div> <!-- /.col -->
+	</div> <!-- /.row -->
+
+<?php get_footer(); ?>
+```
+
+Now you’ll create `content-single.php`, which is a duplicate of `content.php`.
+
+```
+<div class="blog-post">
+	<h2 class="blog-post-title"><?php the_title(); ?></h2>
+	<p class="blog-post-meta"><?php the_date(); ?> by <a href="#"><?php the_author(); ?></a></p>
+ <?php the_content(); ?>
+</div><!-- /.blog-post -->
+```
+
+So now you can see that `index.php` is pulling in `content.php`, and `single.php` is pulling in `content-single.php`.
+
+Going back to the original `content.php`, we have the title of each article.
+
+```
+<h2 class="blog-post-title"><?php the_title(); ?></h2>
+```
+
+Using the_permalink(), we’re going to link to the single page.
+
+```
+<h2 class="blog-post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+```
+
+Now you have a blog posts on the main page that are linking individual blog post page.
+
