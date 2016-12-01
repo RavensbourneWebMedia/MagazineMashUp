@@ -565,3 +565,54 @@ Finally, we’ll want to change `the_content()` to `the_excerpt()` on `content.p
 ```
 
 ### Pagination
+
+
+In the original Bootstrap blog example, there is pagination to be able to click through multiple pages if you have many blog posts.
+
+
+Currently, your `index.php` file looks like this.
+
+```
+<?php get_header(); ?>
+
+	<div class="row">
+		<div class="col-sm-8 blog-main">
+
+			<?php 
+			if ( have_posts() ) : while ( have_posts() ) : the_post();
+				get_template_part( 'content', get_post_format() );
+			endwhile; endif; ?>
+
+		</div>	<!-- /.blog-main -->
+		<?php get_sidebar(); ?>
+	</div> 	<!-- /.row -->
+
+<?php get_footer(); ?>
+```
+
+If you’ll notice, the loop has if and while, then later endif and endwhile. To insert pagination, we’ll have to put it after the endwhile but before the endif. This means that it won’t repeat for each loop, but will only show up once based on posts.
+
+Pagination links are called like this:
+
+```
+<?php next_posts_link( 'Older posts' ); ?>
+<?php previous_posts_link( 'Newer posts' ); ?>
+```
+
+In `index.php`, between `endwhile;` and `endif;`, I’m going to place this code.
+
+```
+<nav>
+	<ul class="pager">
+		<li><?php next_posts_link( 'Previous' ); ?></li>
+		<li><?php previous_posts_link( 'Next' ); ?></li>
+	</ul>
+</nav>
+```
+
+By default, 10 posts will show up on a page before it will link to another page. For testing purposes, I’m going to go to Settings > Reading and change Blog pages show at most to 1.
+
+
+Now we have functioning pagination.
+
+
