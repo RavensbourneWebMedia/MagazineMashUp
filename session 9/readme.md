@@ -1196,7 +1196,7 @@ function save_your_fields_meta( $post_id ) {
 	}
 }
 add_action( 'save_post', 'save_your_fields_meta' );
-``
+```
 
 Make sure your_meta_box_nonce matches the name attribute, and you’ve specified your_fields in the meta box function. This code is verifying the Nonce from the first function, making sure the user has the correct permissions to update the fields, and updating the post meta fields.
 
