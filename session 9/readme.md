@@ -694,3 +694,343 @@ Of course, you might want to show how many comments there are or link to the com
 </a>
 ```
 
+Now that we have pagination, blog posts, and comments set up, we can move on to functions.
+
+# Using and Understanding the WordPress Functions File
+
+Located in your theme directory, you can create a file called functions.php. You can use `functions.php` to add functionality and change defaults throughout WordPress. Plugins and custom functions are basically the same – any code you create can be made into a plugin, and vice versa. The only difference is that anything you place in your theme’s functions is only applied while that theme is actively selected.
+
+I have a README on GitHub of useful WordPress functions, which might come in handy the more you use them.
+`functions.php` seems complicated, but it’s mostly made up of a bunch of code blocks that, simplified, look like this:
+
+```
+function custom_function() {
+	//code
+}
+add_action( 'action', 'custom_function');
+```
+
+So, we’re creating our custom function, and adding it in based on action references. Within this file, you can pretty much change or override anything in WordPress.
+
+Let’s go ahead and make `functions.php` and place it in our theme directory.
+
+Since it’s a PHP file, it needs to be begin with the opening PHP tag. It doesn’t need a closing tag; pure PHP files don’t need closing tags.
+
+`<?php`
+
+Eventually, you can insert these types of functions into your own custom plugin that can be used across many themes, but for now we’ll learn how to do it in the theme specific file.
+Enqueue Scripts and Stylesheets
+
+By the end of the last article, I was incorrectly linking to my CSS and JavaScript in the header and footer, respectively. This should be done through the functions file.
+
+First, delete the links to the stylesheets and scripts that you have in your header and footer. They’re no longer going to be hard coded into the theme.
+
+I’m going to make css, js and images directories in the root of my theme. So here’s what I have:
+
+* css
+* bootstrap.min.css
+* style.css
+* js
+* bootstrap.min.js
+
+Now here’s the first code block we’re going to put in functions.php:
+
+```
+// Add scripts and stylesheets
+function startwordpress_scripts() {
+	wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css', array(), '3.3.6' );
+	wp_enqueue_style( 'blog', get_template_directory_uri() . '/css/blog.css' );
+	wp_enqueue_script( 'bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js', array('jquery'), '3.3.6', true );
+}
+
+add_action( 'wp_enqueue_scripts', 'startwordpress_scripts' );
+```
+
+In order for these to properly be inserted into your theme, `<?php wp_head(); ?>` needs to be placed before the closing `</head>` tag, and `<?php wp_footer(); ?>` before the closing `</body>` tag.
+
+By common WordPress convention, I’m naming my script after my theme `(startwordpress_scripts())`. `wp_enqueue_style` is for inserting CSS, and `wp_enqueue_script` for JS. After that, the array contains the ID, location of the file, an additional array with required depenedencies `(such as jQuery)`, and the version number.
+
+Now we have jQuery, Bootstrap CSS, Bootstrap JS, and custom CSS being properly loaded into the website.
+
+# Enqueue Google Fonts
+
+The function to include the Google Fonts stylesheets is slightly different, based on the dynamic nature of the URL. Here is an example using Open Sans.
+
+```
+// Add Google Fonts
+function startwordpress_google_fonts() {
+				wp_register_style('OpenSans', 'http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800');
+				wp_enqueue_style( 'OpenSans');
+		}
+
+
+add_action('wp_print_styles', 'startwordpress_google_fonts');
+```
+
+Now I have Open Sans by Google Fonts linked in my page.
+
+# Fix the WordPress Title
+
+If you’ll notice, we’re currently pulling in the title for the website with this code.
+
+```
+<title><?php echo get_bloginfo( 'name' ); ?></title>
+```
+
+This is not very intuitive – it means that whatever you have set as your website’s title will be the title tag for every page. However, we’re going to want each individual page to show the title of the article first, and also include a reference to the main site title.
+
+Introduced in WordPress 4.1 is the ability to simply have WordPress take care of the title tag in an intuitive way. Simply remove the title tag from your header.php entirely, and in `functions.php`, add this code block.
+
+```
+// WordPress Titles
+add_theme_support( 'title-tag' );
+```
+
+# Create Global Custom Fields
+
+Sometimes, you might have custom settings that you want to be able to set globally. An easy example on this page is the social media links on the sidebar.
+
+
+Right now these links aren’t leading anywhere, but we want to be able to edit it through the admin panel. The source of this code is modified from this Settings API tutorial.
+
+First, we’re going to add a section on the left hand menu called Custom Settings.
+
+
+```
+// Custom settings
+function custom_settings_add_menu() {
+  add_menu_page( 'Custom Settings', 'Custom Settings', 'manage_options', 'custom-settings', 'custom_settings_page', null, 99);
+}
+add_action( 'admin_menu', 'custom_settings_add_menu' );
+```
+
+Then we’re going to create a basic page.
+
+
+```
+// Create Custom Global Settings
+function custom_settings_page() { ?>
+  <div class="wrap">
+    <h1>Custom Settings</h1>
+    <form method="post" action="options.php">
+       <?php
+           settings_fields('section');
+           do_settings_sections('theme-options');      
+           submit_button(); 
+       ?>          
+    </form>
+  </div>
+<?php }
+```
+
+The code contains a form posting to `options.php`, a section and theme-options, and a submit button.
+
+Now we’re going to create an input field for Twitter.
+
+```
+// Twitter
+function setting_twitter() { ?>
+  <input type="text" name="twitter" id="twitter" value="<?php echo get_option('twitter'); ?>" />
+<?php }
+
+
+Finally, we’re going to set up the page to show, accept and save the option fields.
+
+```
+function custom_settings_page_setup() {
+  add_settings_section('section', 'All Settings', null, 'theme-options');
+  add_settings_field('twitter', 'Twitter URL', 'setting_twitter', 'theme-options', 'section');
+
+  register_setting('section', 'twitter');
+}
+add_action( 'admin_init', 'custom_settings_page_setup' );
+```
+
+Now I’ve saved my Twitter URL in the field.
+
+
+For good measure, I’m going to add another example, this time for GitHub.
+
+```
+function setting_github() { ?>
+  <input type="text" name="github" id="github" value="<?php echo get_option('github'); ?>" />
+<?php }
+Now you’ll just duplicate the fields in custom_settings_page_setup.
+
+  add_settings_field('twitter', 'Twitter URL', 'setting_twitter', 'theme-options', 'section');
+  add_settings_field('github', 'GitHub URL', 'setting_github', 'theme-options', 'section');
+  
+	register_setting('section', 'twitter');
+  register_setting('section', 'github');
+```
+
+Now back in `sidebar.php`, I’m going to change the links from this:
+
+```
+<li><a href="#">GitHub</a></li>
+<li><a href="#">Twitter</a></li>
+```
+
+To this:
+
+```
+<li><a href="<?php echo get_option('github'); ?>">GitHub</a></li>
+<li><a href="<?php echo get_option('twitter'); ?>">Twitter</a></li>
+```
+
+And now the URLs are being dynamically generated from the custom settings panel!
+
+# Featured Image
+
+
+You might want to have a featured image for each blog post. This functionality is not built into the WordPress core, but is extremely easy to implement. Place this code in your functions.php.
+
+```
+// Support Featured Images
+add_theme_support( 'post-thumbnails' );
+```
+
+Now you’ll see an area where you can upload an image on each blog post.
+
+I’m just going to upload something I drew in there for an example. Now, display the image in `content-single.php`.
+
+```
+<?php if ( has_post_thumbnail() ) {
+  the_post_thumbnail();
+} ?>
+```
+
+Now you have an image on your individual post pages! If you wanted the thumbnail to show up on on the main blog page as well, you could do something like this on `content.php` to split the page if a thumbnail is present:
+
+```
+<?php if ( has_post_thumbnail() ) {?>
+	<div class="row">
+		<div class="col-md-4">
+			<?php	the_post_thumbnail('thumbnail'); ?>
+		</div>
+		<div class="col-md-6">
+			<?php the_excerpt(); ?>
+		</div>
+	</div>
+	<?php } else { ?>
+	<?php the_excerpt(); ?>
+	<?php } ?>
+```
+
+# Custom Post Types
+
+One of the most versatile way to extend your WordPress site as a full blown content management system is with custom post types. A custom post type is the same as Posts, except you can add as many of them as you want, and with as much custom functionality as you want.
+
+If you’re interested in using plugins, you can download the Advanced Custom Fields plugin, which will add a great deal of customizability to your theme with little effort.
+
+For now, I’m going to show you how to set up a simple custom post type, and call the post in it’s own loop. There is much more that can be done with custom post types, but that’s a bit more complicated and deserves an article all of its own.
+
+Custom Post Types on the WordPress codex will also give you more insight on some of the possibilities available.
+
+In `functions.php`, I’m going to create the custom post type called My Custom Post.
+
+
+```
+// Custom Post Type
+function create_my_custom_post() {
+	register_post_type('my-custom-post',
+			array(
+			'labels' => array(
+					'name' => __('My Custom Post'),
+					'singular_name' => __('My Custom Post'),
+			),
+			'public' => true,
+			'has_archive' => true,
+			'supports' => array(
+					'title',
+					'editor',
+					'thumbnail',
+				  'custom-fields'
+			)
+	));
+}
+add_action('init', 'create_my_custom_post');
+```
+
+In the `create_my_custom_post()`, I’ve created a post called My Custom Post with a slug of my-custom-post. If my original URL was example.com, the custom post type would appear at example.com/my-custom-post.
+
+In supports, you can see what I’m adding – title, editor, thumbnail, and custom fields. These translate to the fields on the back end that will be available.
+
+* title is the title field that I call with `<?php the_title(); ?>`.
+* editor is the content editing area that I call with `<?php the_content(); ?>`.
+* thumbnail is the featured image that I call with `<?php the_post_thumbnail(); ?>`.
+* custom-fields are custom fields that I can add in and call later.
+*I’ve decided I’m going to make a new page for the custom post to loop in. I created a page called Custom, which will appear at `example.com/custom`. Right now, my page is pulling from `page.php`, like all the other pages.
+
+I’m going to create `page-custom.php`, and copy the code over from `page.php`. According to the WordPress template hierarchy, a `page-name.php` will override `page.php`.
+
+
+**The original loop we used looked like this:**
+
+```
+if ( have_posts() ) : while ( have_posts() ) : the_post();
+	// Contents of the Loop
+endwhile; endif; 
+```
+
+A custom post type loop will look like this:
+
+```
+$custom_query = new WP_Query( $args );
+while ($custom_query->have_posts()) : $custom_query->the_post();
+  // Contents of the custom Loop
+endwhile;
+```
+
+
+Note that this only a while, and does not have an if or endif.
+
+I’ll have to define the $args or arguments, before the loop.
+
+
+```
+$args =  array( 
+	'post_type' => 'my-custom-post',
+	'orderby' => 'menu_order',
+	'order' => 'ASC'
+);
+```
+
+Here I’m defining the post type as my-custom-post, and ordering the posts in ascending order.
+
+So here’s the entire code for `page-custom.php`.
+
+```
+<?php get_header(); ?>
+
+	<div class="row">
+		<div class="col-sm-12">
+
+			<?php 
+				$args =  array( 
+					'post_type' => 'my-custom-post',
+					'orderby' => 'menu_order',
+					'order' => 'ASC'
+				);
+				 $custom_query = new WP_Query( $args );
+            while ($custom_query->have_posts()) : $custom_query->the_post(); ?>
+
+				<div class="blog-post">
+					<h2 class="blog-post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+					<?php the_excerpt(); ?>
+				</div>
+
+				<?php endwhile; ?>
+		</div> <!-- /.col -->
+	</div> <!-- /.row -->
+
+	<?php get_footer(); ?>
+```
+
+Now `example.com/custom` will only pull in posts from the custom post type we created. Right now, the custom post type is set up to only do things that the normal posts can do, but the more you fall down the rabbit hole, the more possibilities you discover.
+
+
+
+
+
+
