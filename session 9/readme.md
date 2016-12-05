@@ -880,7 +880,7 @@ To this:
 
 And now the URLs are being dynamically generated from the custom settings panel!
 
-# Featured Image
+## Featured Image
 
 
 You might want to have a featured image for each blog post. This functionality is not built into the WordPress core, but is extremely easy to implement. Place this code in your functions.php.
@@ -917,7 +917,7 @@ Now you have an image on your individual post pages! If you wanted the thumbnail
 	<?php } ?>
 ```
 
-# Custom Post Types
+## Custom Post Types
 
 One of the most versatile way to extend your WordPress site as a full blown content management system is with custom post types. A custom post type is the same as Posts, except you can add as many of them as you want, and with as much custom functionality as you want.
 
