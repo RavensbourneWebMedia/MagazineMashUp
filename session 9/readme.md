@@ -696,7 +696,7 @@ Of course, you might want to show how many comments there are or link to the com
 
 Now that we have pagination, blog posts, and comments set up, we can move on to functions.
 
-# Using and Understanding the WordPress Functions File
+## Using and Understanding the WordPress Functions File
 
 Located in your theme directory, you can create a file called functions.php. You can use `functions.php` to add functionality and change defaults throughout WordPress. Plugins and custom functions are basically the same – any code you create can be made into a plugin, and vice versa. The only difference is that anything you place in your theme’s functions is only applied while that theme is actively selected.
 
@@ -752,7 +752,7 @@ By common WordPress convention, I’m naming my script after my theme `(startwor
 
 Now we have jQuery, Bootstrap CSS, Bootstrap JS, and custom CSS being properly loaded into the website.
 
-# Enqueue Google Fonts
+## Enqueue Google Fonts
 
 The function to include the Google Fonts stylesheets is slightly different, based on the dynamic nature of the URL. Here is an example using Open Sans.
 
@@ -786,7 +786,7 @@ Introduced in WordPress 4.1 is the ability to simply have WordPress take care of
 add_theme_support( 'title-tag' );
 ```
 
-# Create Global Custom Fields
+## Create Global Custom Fields
 
 Sometimes, you might have custom settings that you want to be able to set globally. An easy example on this page is the social media links on the sidebar.
 
@@ -832,7 +832,7 @@ Now we’re going to create an input field for Twitter.
 function setting_twitter() { ?>
   <input type="text" name="twitter" id="twitter" value="<?php echo get_option('twitter'); ?>" />
 <?php }
-
+```
 
 Finally, we’re going to set up the page to show, accept and save the option fields.
 
