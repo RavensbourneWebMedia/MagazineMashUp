@@ -1329,6 +1329,7 @@ Simple output of the text field.
 ```
 <h1>Text Input</h1>
 <?php echo $meta['text']; ?>
+```
 
 ## Textarea
 Simple output of the textarea.
