@@ -1389,7 +1389,7 @@ And finally, displaying the image.
 
 Here is the final output of everything I filled out earlier.
 
-**PCITURE**
+![alt text](images/lion.jpg "page")
 
 
 
