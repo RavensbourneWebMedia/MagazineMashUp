@@ -1320,7 +1320,7 @@ Now, we have all our fields, and they all appear in the Your Fields meta box. Iâ
 
 These will all go in the `$your_loop query`. Make sure `$meta = get_post_meta( $post->ID, 'your_fields', true );` is in your loop.
 
-**PICTURE**
+![alt text](images/output.jpg "page")
 
 ## Text Input
 
