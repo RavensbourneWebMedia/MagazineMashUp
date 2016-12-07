@@ -1141,11 +1141,11 @@ More detail on this function can be found here. The actual function here is `add
 
 Now if you go back into your post, you’ll see this below the editor.
 
-**PICTURES**
+![alt text](images/custome1.jpg "page")
 
 It’s an empty meta box! Additionally, if you click on Screen Options at the top of the post, you’ll see Your Fields in the options.
 
-**PIC**
+![alt text](images/custome2.jpg "page")
 
 Neat. Now it’s time to start putting stuff in there.
 
