@@ -1099,6 +1099,8 @@ The variable `$your_loop` can be anything, I’m just sticking to a common theme
 ## Back End
 Updating the title and editor fields like in a regular post. 
 
+![alt text](images/backend.jpg "page")
+
 
 ##Code
 Inserting the template codes like normal.
@@ -1113,6 +1115,8 @@ Inserting the template codes like normal.
 
 ## Front End
 And here we are. I have no styles or anything, because it’s not necessary for the point of the article, and I don’t like adding unnecessary complexity.
+
+![alt text](images/fontend.jpg "page")
 
 
 Alright, so the custom post is all set up 
